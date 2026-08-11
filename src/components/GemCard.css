@@ -1,0 +1,10 @@
+.gem-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 250px;
+}
+
+.gem-card h2 {
+  margin-top: 0;
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './GemCard.css'
 
 type GemCardProps = {
@@ -15,17 +16,37 @@ function GemCard({
   id,
   name,
   gemType,
+  origin,
   carat,
-  price
+  price,
+  certificate,
+  certificateId
 }: GemCardProps) {
   return (
-    <div className="gem-card">
-      <h2>{name}</h2>
+    <Link to={`/gems/${id}`} className="gem-card-link">
+      <article className="gem-card">
+        <h2>{name}</h2>
 
-      <p>{gemType}</p>
-      <p>{carat} ct</p>
-      <p>NZ${price}</p>
-    </div>
+        <p>{gemType}</p>
+
+        {origin && (
+          <p>Origin: {origin}</p>
+        )}
+
+        <p>{carat} ct</p>
+
+        {certificate && (
+          <p>
+            Certificate: {certificate}
+            {certificateId && ` · ${certificateId}`}
+          </p>
+        )}
+
+        <p className="gem-price">
+          NZ${price.toLocaleString()}
+        </p>
+      </article>
+    </Link>
   )
 }
 

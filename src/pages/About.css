@@ -1,67 +1,161 @@
 .about-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 80px 60px;
+  width: 100%;
+
+  min-height: calc(100vh - 85px);
+
+  padding: 90px 60px 120px;
 }
 
 .about-hero {
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+
+  gap: 100px;
+
   align-items: center;
 }
 
-.about-image-container {
-  width: 100%;
+
+/* IMAGE */
+
+.about-image-wrapper {
+  position: relative;
+}
+
+.about-image-glow {
+  position: absolute;
+
+  width: 70%;
+  height: 70%;
+
+  left: 15%;
+  bottom: -6%;
+
+  background: rgba(28, 123, 119, 0.28);
+
+  filter: blur(80px);
+
+  border-radius: 50%;
+
+  z-index: -1;
 }
 
 .about-image {
   width: 100%;
-  height: 600px;
+  height: 650px;
+
   object-fit: cover;
-  border-radius: 4px;
+
+  display: block;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(34, 126, 123, 0.08);
 }
 
+
+/* TEXT */
+
 .about-content {
-  max-width: 500px;
+  max-width: 540px;
 }
 
 .about-label {
-  font-size: 13px;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  color: #777;
+  margin: 0 0 24px;
+
+  color: var(--teal-light);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  letter-spacing: 3px;
 }
 
 .about-content h1 {
-  font-size: 48px;
-  margin: 0 0 30px;
+  margin: 0 0 34px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(56px, 5vw, 82px);
+
+  line-height: 0.95;
+
+  letter-spacing: -2px;
+
+  color: var(--text-main);
+}
+
+.about-content h1 span {
+  display: block;
+
+  color: #9bd1cc;
+
+  font-style: italic;
 }
 
 .about-content p {
+  margin: 0 0 22px;
+
+  color: var(--text-muted);
+
+  font-size: 16px;
+  font-weight: 300;
+
+  line-height: 1.85;
+}
+
+.about-content .about-intro {
+  color: #dce2df;
+
   font-size: 18px;
-  line-height: 1.8;
-  color: #444;
-  margin-bottom: 20px;
+
+  line-height: 1.75;
 }
 
 
-/* phone / tablet */
-@media (max-width: 768px) {
+/* MOBILE */
+
+@media (max-width: 900px) {
+
   .about-page {
-    padding: 40px 24px;
+    padding: 60px 24px 90px;
   }
 
   .about-hero {
     grid-template-columns: 1fr;
-    gap: 40px;
+
+    gap: 60px;
   }
 
   .about-image {
-    height: 450px;
+    height: 520px;
+  }
+
+  .about-content {
+    max-width: none;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .about-image {
+    height: 420px;
   }
 
   .about-content h1 {
-    font-size: 36px;
+    font-size: 52px;
   }
+
 }

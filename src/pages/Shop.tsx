@@ -1,39 +1,102 @@
+import { useEffect, useState } from 'react'
 import GemCard from '../components/GemCard'
+import { supabase } from '../lib/supabase.ts'
 import './Shop.css'
 
 
+
+type GemRow = {
+  id: number
+  name: string
+  gemType: string
+  colour: string
+  origin: string | null
+  carat: number
+  price: number
+  certificate: string | null
+  certificateId: string | null
+  image: string
+}
+
+
+function getImageUrl(path: string) {
+  const { data } = supabase.storage
+    .from('photos')
+    .getPublicUrl(path)
+
+  return data.publicUrl
+}
+
+
+
 function Shop() {
+  const [gems, setGems] = useState<GemRow[]>([])
+  const [loading, setLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  useEffect(() => {
+    async function loadGems() {
+      const { data, error } = await supabase
+        .from('gems')
+        .select(`
+          id,
+          name,
+          gemType,
+          colour,
+          origin,
+          carat,
+          price,
+          certificate,
+          certificateId,
+          image
+        `)
+        .order('id', { ascending: true })
+
+      if (error) {
+        console.error('Failed to load gems:', error)
+        setErrorMessage(error.message)
+        setLoading(false)
+        return
+      }
+
+      setGems(data ?? [])
+      setLoading(false)
+    }
+
+    void loadGems()
+  }, [])
+
   return (
-    <main>
+    <main className="shop-page">
       <h1>Shop Gems</h1>
-      <div className="gem-grid">
- 
-        <GemCard
-          id={1}
-          name="Madagascar Blue Sapphire"
-          gemType="Sapphire"
-          carat={1.2}
-          price={1500}
-          image="/images/madagascar-sapphire.jpg"
-        />
 
-        <GemCard
-          id={2}
-          name="Mozambique Ruby"
-          gemType="Ruby"
-          carat={1}
-          price={850}
-        />
+      {loading && <p>Loading gems...</p>}
 
-        <GemCard
-          id={3}
-          name="Orange Garnet"
-          gemType="Garnet"
-          carat={2.1}
-          price={620}
-        />
+      {errorMessage && (
+        <p role="alert">
+          Could not load gems: {errorMessage}
+        </p>
+      )}
 
-    </div>
+      {!loading && !errorMessage && (
+        <div className="gem-grid">
+          {gems.map((gem) => (
+            <GemCard
+              key={gem.id}
+              id={gem.id}
+              name={gem.name}
+              gemType={gem.gemType}
+              colour={gem.colour}
+              origin={gem.origin ?? undefined}
+              carat={gem.carat}
+              price={gem.price}
+              certificate={gem.certificate ?? undefined}
+              certificateId={gem.certificateId ?? undefined}
+              image={getImageUrl(gem.image)}
+            />
+          ))}
+        </div>
+      )}
     </main>
   )
 }

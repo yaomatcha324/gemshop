@@ -2,7 +2,7 @@
 .shop-page {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 20px;
 }
 
 
@@ -39,5 +39,5 @@ h1 {
   text-shadow:
     0 0 24px rgba(121, 199, 192, 0.08);
 
-  padding-top: 30px;
+  
 }   

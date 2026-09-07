@@ -39,18 +39,18 @@ function GemCard({
 
       <div className="gem-card-info"></div>
 
-        <p>{gemType}</p>
-        <p>{colour}</p>
+        <p>Type:  {gemType}</p>
+        <p>Colour:   {colour}</p>
 
         {origin && (
-          <p>Origin: {origin}</p>
+          <p>Origin:   {origin}</p>
         )}
 
-        <p>{carat} ct</p>
+        <p>Carat:   {carat} ct</p>
 
         {certificate && (
           <p>
-            Certificate: {certificate}
+            Certificate:   {certificate}
             {certificateId && ` · ${certificateId}`}
           </p>
         )}

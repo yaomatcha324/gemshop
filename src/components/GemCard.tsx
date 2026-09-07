@@ -5,29 +5,42 @@ type GemCardProps = {
   id: number
   name: string
   gemType: string
+  colour : string
   origin?: string
   carat: number
   price: number
   certificate?: string
   certificateId?: string
+  image: string 
 }
 
 function GemCard({
   id,
   name,
   gemType,
+  colour,
   origin,
   carat,
   price,
   certificate,
-  certificateId
+  certificateId,
+  image
+
 }: GemCardProps) {
   return (
     <Link to={`/gems/${id}`} className="gem-card-link">
       <article className="gem-card">
         <h2>{name}</h2>
+      <img
+        src={image}
+        alt={name}
+        className="gem-card-image"
+      />
+
+      <div className="gem-card-info"></div>
 
         <p>{gemType}</p>
+        <p>{colour}</p>
 
         {origin && (
           <p>Origin: {origin}</p>

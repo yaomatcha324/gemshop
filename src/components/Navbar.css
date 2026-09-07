@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   padding: 24px 64px;
@@ -17,7 +17,13 @@
   z-index: 100;
 }
 
+
 .navbar-logo {
+  /*the logo stays in the middle */
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
   margin: 0;
 
   font-family: 'Cormorant Garamond', serif;

@@ -24,31 +24,27 @@ function About() {
           </p>
 
           <h1>
-            Gemstones with
-            <span> character.</span>
+            Gemstones and more
           </h1>
 
           <p className="about-intro">
-            Hi, I'm Yao — the founder of Yao Gems,
-            an independent gemstone shop based in New Zealand.
+            Hi, I'm Yao — 
+            and this is my online independent gemstone shop based in Auckland, New Zealand.
           </p>
 
           <p>
-            I've always been fascinated by gemstones — especially stones
-            with unusual colours, interesting origins, and individual
-            character.
+            I've always been fascinated by gemstones, especially stones
+            with unusual colours and interesting fires.
           </p>
 
           <p>
-            Rather than looking only for conventional perfection,
-            I'm drawn to gemstones that have something distinctive:
-            beautiful colour, unusual fire, an interesting cut,
-            or simply a personality of their own.
+            When people think of gemstones, engagement rings, and commitment, diamonds are often the first thing that comes to mind. But they are far from the only choice.
+            There is an entire world of colourful, distinctive, and often more affordable gemstones waiting to be discovered.
           </p>
 
           <p>
-            Yao Gems was created to share carefully selected gemstones
-            that I genuinely find beautiful and interesting.
+            A meaningful piece of jewellery does not have to follow a formula.
+            The stone you choose can reflect a colour you love, a memory, a person, or simply something that feels unmistakably yours.
           </p>
 
         </div>

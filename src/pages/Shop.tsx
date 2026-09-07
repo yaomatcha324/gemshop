@@ -1,11 +1,13 @@
 import GemCard from '../components/GemCard'
+import './Shop.css'
+
 
 function Shop() {
   return (
     <main>
       <h1>Shop Gems</h1>
-
-      <div>
+      <div className="gem-grid">
+ 
         <GemCard
           id={1}
           name="Madagascar Blue Sapphire"
@@ -29,7 +31,8 @@ function Shop() {
           carat={2.1}
           price={620}
         />
-      </div>
+
+    </div>
     </main>
   )
 }

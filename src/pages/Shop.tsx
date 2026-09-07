@@ -14,6 +14,7 @@ function Shop() {
           gemType="Sapphire"
           carat={1.2}
           price={1500}
+          image="/images/madagascar-sapphire.jpg"
         />
 
         <GemCard

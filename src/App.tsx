@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Shop from './pages/Shop'
 import About from './pages/About'
 import Login from './pages/Login'
+import Mine from './pages/Mine'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/gems/:id" element={<GemDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/mine" element={<Mine />} />
       </Routes>
     </>
   )

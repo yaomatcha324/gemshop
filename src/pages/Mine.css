@@ -49,6 +49,19 @@
   cursor: pointer;
 }
 
+.mine-primary-button {
+  display: inline-block;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.mine-admin-card {
+  border-color: rgba(121, 199, 192, 0.35);
+  background:
+    linear-gradient(135deg, rgba(24, 94, 91, 0.18), transparent),
+    var(--surface);
+}
+
 .mine-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

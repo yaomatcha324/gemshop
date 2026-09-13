@@ -23,9 +23,9 @@
 .home-page .home-collections h2 {
   margin: 0;
   color: var(--text-main);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: clamp(42px, 5vw, 68px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 0.95;
   text-align: left;
@@ -173,11 +173,13 @@
   display: inline-block;
   margin-top: 34px;
   padding: 13px 20px;
-  border: 1px solid rgba(121, 199, 192, 0.45);
+  border: 1px solid white;
+  background-color: white;
+  color: #021a1a;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: background 200ms ease, border-color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 .home-outline-link:hover {
@@ -212,7 +214,7 @@
   gap: 22px;
   background: radial-gradient(circle at 50% 45%, rgba(91, 46, 163, 0.25), transparent 42%), #061d1d;
   color: var(--text-muted);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 20px;
   letter-spacing: 0.04em;
 }

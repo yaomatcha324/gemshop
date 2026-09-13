@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 
 import {
+  Link,
   Navigate,
   useNavigate,
 } from 'react-router-dom'
@@ -12,7 +13,7 @@ import './Mine.css'
 
 function Mine() {
   const navigate = useNavigate()
-  const { user, loading, signOut } = useAuth()
+  const { user, loading, isAdmin, signOut } = useAuth()
 
   const [currentPassword, setCurrentPassword] =
     useState('')
@@ -101,6 +102,19 @@ function Mine() {
       </header>
 
       <div className="mine-grid">
+        {isAdmin && (
+          <section className="mine-card mine-admin-card">
+            <p className="mine-eyebrow">Administrator only</p>
+            <h2>Admin Workspace</h2>
+            <p>
+              Add new gemstone listings and manage the current inventory.
+            </p>
+            <Link className="mine-primary-button" to="/admin">
+              Open Admin
+            </Link>
+          </section>
+        )}
+
         <section className="mine-card">
           <h2>My Favourites</h2>
           <p>

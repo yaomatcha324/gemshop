@@ -26,10 +26,10 @@
   transform: translateX(-50%);
   margin: 0;
 
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
 
   font-size: 34px;
-  font-weight: 500;
+  font-weight: 400;
 
   letter-spacing: 1.5px;
 
@@ -97,9 +97,10 @@
   }
 
   .navbar-links {
+    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    gap: clamp(18px, 7vw, 30px);
+    gap: 14px clamp(18px, 5vw, 26px);
   }
 
   .navbar-links a {

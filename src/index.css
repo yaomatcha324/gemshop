@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montenegrin+Gothic+One&display=swap');
 
 :root {
   --bg-main: #021a1a;
@@ -13,6 +13,8 @@
 
   --border: rgba(255, 255, 255, 0.12);
   --surface: rgba(255, 255, 255, 0.035);
+
+  --font-display: 'Montenegrin Gothic One', Georgia, serif;
 }
 
 * {
@@ -49,8 +51,8 @@ body {
 h1,
 h2,
 h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 400;
 }
 
 a {

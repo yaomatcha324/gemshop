@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { supabase } from '../lib/supabase'
@@ -15,6 +15,7 @@ type Gem = {
   certificate: string | null
   certificateId: string | null
   image: string | null
+  images: string[] | null
   description: string | null
 }
 
@@ -33,6 +34,8 @@ function GemDetails() {
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] =
     useState<string | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const galleryRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     async function loadGem() {
@@ -55,6 +58,7 @@ function GemDetails() {
           certificate,
           certificateId,
           image,
+          images,
           description
         `)
         .eq('id', id)
@@ -73,6 +77,42 @@ function GemDetails() {
 
     void loadGem()
   }, [id])
+
+  useEffect(() => {
+    setActiveImageIndex(0)
+    galleryRef.current?.scrollTo({ left: 0 })
+  }, [id])
+
+  const galleryImages = gem
+    ? [...new Set([
+        ...(gem.images ?? []),
+        ...(gem.image ? [gem.image] : []),
+      ])]
+    : []
+
+  function showImage(index: number) {
+    const gallery = galleryRef.current
+
+    if (!gallery) return
+
+    gallery.scrollTo({
+      left: gallery.clientWidth * index,
+      behavior: 'smooth',
+    })
+    setActiveImageIndex(index)
+  }
+
+  function handleGalleryScroll() {
+    const gallery = galleryRef.current
+
+    if (!gallery || gallery.clientWidth === 0) return
+
+    const nextIndex = Math.round(gallery.scrollLeft / gallery.clientWidth)
+
+    if (nextIndex !== activeImageIndex) {
+      setActiveImageIndex(nextIndex)
+    }
+  }
 
   if (loading) {
     return (
@@ -115,16 +155,73 @@ function GemDetails() {
       </Link>
 
       <article className="gem-details">
-        <div className="gem-details-image-container">
-          {gem.image ? (
-            <img
-              src={getImageUrl(gem.image)}
-              alt={gem.name}
-              className="gem-details-image"
-            />
-          ) : (
+        <div className="gem-gallery">
+          <div className="gem-gallery-stage">
+            {galleryImages.length > 0 ? (
+              <div
+                className="gem-gallery-track"
+                ref={galleryRef}
+                onScroll={handleGalleryScroll}
+              >
+                {galleryImages.map((image, index) => (
+                  <div className="gem-gallery-slide" key={image}>
+                    <img
+                      src={getImageUrl(image)}
+                      alt={`${gem.name} — view ${index + 1}`}
+                      className="gem-details-image"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
             <div className="gem-details-no-image">
               No image available
+            </div>
+            )}
+
+            {galleryImages.length > 1 && (
+              <>
+                <button
+                  className="gem-gallery-arrow gem-gallery-arrow--previous"
+                  type="button"
+                  aria-label="Show previous image"
+                  onClick={() => showImage(activeImageIndex - 1)}
+                  disabled={activeImageIndex === 0}
+                >
+                  ←
+                </button>
+
+                <button
+                  className="gem-gallery-arrow gem-gallery-arrow--next"
+                  type="button"
+                  aria-label="Show next image"
+                  onClick={() => showImage(activeImageIndex + 1)}
+                  disabled={activeImageIndex === galleryImages.length - 1}
+                >
+                  →
+                </button>
+
+                <span className="gem-gallery-count" aria-live="polite">
+                  {activeImageIndex + 1} / {galleryImages.length}
+                </span>
+              </>
+            )}
+          </div>
+
+          {galleryImages.length > 1 && (
+            <div className="gem-gallery-thumbnails" aria-label="Choose product image">
+              {galleryImages.map((image, index) => (
+                <button
+                  className={`gem-gallery-thumbnail${index === activeImageIndex ? ' is-active' : ''}`}
+                  type="button"
+                  key={image}
+                  aria-label={`Show image ${index + 1}`}
+                  onClick={() => showImage(index)}
+                >
+                  <img src={getImageUrl(image)} alt="" />
+                </button>
+              ))}
             </div>
           )}
         </div>

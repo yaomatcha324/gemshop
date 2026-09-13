@@ -1,3 +1,4 @@
+import FAQ from '../components/FAQ'
 import './About.css'
 
 function About() {
@@ -50,6 +51,8 @@ function About() {
         </div>
 
       </section>
+
+      <FAQ />
 
     </main>
   )

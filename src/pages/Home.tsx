@@ -61,7 +61,6 @@ function Home() {
       <section className="home-section home-featured" aria-labelledby="featured-title">
         <div className="home-section-heading">
           <div>
-            <p className="home-eyebrow">Selected gemstones</p>
             <h1 id="featured-title" className="home-title">Featured Gems</h1>
           </div>
 
@@ -72,7 +71,7 @@ function Home() {
 
         <div className="featured-panel">
           {loading && (
-            <div className="home-message">Loading featured gems...</div>
+            <div className="home-message">Polishing gems...</div>
           )}
 
           {errorMessage && (
@@ -121,19 +120,15 @@ function Home() {
 
       <section className="home-section home-about" aria-labelledby="about-title">
         <div className="about-copy">
-          <p className="home-eyebrow">Our story</p>
           <h2 id="about-title">About Yao Gems</h2>
           <p>
-            We choose natural gemstones for their individual colour, character,
-            and story. Every piece is presented with clear details, so you can
-            find a stone that genuinely feels like yours.
+            Gemstones can be a lot more than a luxury symbol. 
           </p>
           <p>
-            From timeless favourites to unusual one-of-a-kind finds, our
-            collection celebrates the beauty found in nature.
+            Have a look at our gems and admire the beautiful creation of this word.
           </p>
           <Link className="home-outline-link" to="/about">
-            Learn more about us
+            Explore more shininess
           </Link>
         </div>
 
@@ -163,25 +158,11 @@ function Home() {
             <span>01</span>
             <div>
               <p>Curated selection</p>
-              <h3>Rare Finds</h3>
+              <h3>Gallery</h3>
             </div>
           </Link>
 
-          <Link className="collection-card collection-card--two" to="/shop">
-            <span>02</span>
-            <div>
-              <p>Freshly added</p>
-              <h3>New Arrivals</h3>
-            </div>
-          </Link>
 
-          <Link className="collection-card collection-card--three" to="/shop">
-            <span>03</span>
-            <div>
-              <p>Browse every stone</p>
-              <h3>All Gemstones</h3>
-            </div>
-          </Link>
         </div>
       </section>
     </main>

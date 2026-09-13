@@ -5,6 +5,85 @@
   padding: 20px;
 }
 
+.shop-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 16px;
+  align-items: end;
+  margin: 34px 40px 14px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.shop-filter {
+  display: grid;
+  gap: 8px;
+}
+
+.shop-filter span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.shop-filter select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  outline: none;
+  background: #062120;
+  color: var(--text-main);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shop-filter select:focus-visible {
+  border-color: var(--teal-light);
+  box-shadow: 0 0 0 3px rgba(121, 199, 192, 0.1);
+}
+
+.shop-filter-reset {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid white;
+  background: white;
+  color: var(--bg-main);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.shop-filter-reset:hover:not(:disabled) {
+  background: transparent;
+  color: white;
+}
+
+.shop-filter-reset:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.shop-result-count {
+  margin: 0 40px 18px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.shop-empty-state {
+  margin: 60px 40px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
 
 /* show 2 in a row on pc and one in a row on phone*/
 .gem-grid {
@@ -17,20 +96,30 @@
   padding: 0 40px;
 }
 @media (max-width: 768px) {
+  .shop-filters {
+    grid-template-columns: 1fr;
+    margin-inline: 0;
+  }
+
+  .shop-result-count {
+    margin-inline: 0;
+  }
+
   .gem-grid {
     grid-template-columns: 1fr;
+    padding: 0;
   }
 }
 
 h1 {
   margin: 0 0 18px;
 
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
 
   text-align: center;
 
   font-size: 44px;
-  font-weight: 500;
+  font-weight: 400;
 
   letter-spacing: 1.8px;
 
@@ -41,3 +130,25 @@ h1 {
 
   
 }   
+
+
+.shop-filters {
+  padding: 20px;      
+  gap: 16px;          
+  border-radius: 12px; 
+}
+
+
+.shop-filter select {
+  background: white;
+  color: #021a1a;
+  border-radius: 8px;
+  height: 46px;
+}
+
+
+.shop-filter-reset {
+  background: #5a1515;
+  color: white;
+  border-radius: 8px;
+}

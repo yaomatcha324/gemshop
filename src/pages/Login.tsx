@@ -48,8 +48,7 @@ function Login() {
 
     setLoading(false)
 
-    // 管理员页面做好后改成 navigate('/admin')
-    navigate('/shop')
+    navigate('/mine')
   }
 
   return (

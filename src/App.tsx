@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
+import AdminRoute from './components/AdminRoute'
+import Admin from './pages/Admin'
 import GemDetails from './pages/GemDetails'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
@@ -20,6 +22,14 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mine" element={<Mine />} />
+        <Route
+          path="/admin"
+          element={(
+            <AdminRoute>
+              <Admin />
+            </AdminRoute>
+          )}
+        />
       </Routes>
     </>
   )

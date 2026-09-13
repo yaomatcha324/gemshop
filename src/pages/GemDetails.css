@@ -26,15 +26,36 @@
   align-items: start;
 }
 
-.gem-details-image-container {
+.gem-gallery {
+  min-width: 0;
+}
+
+.gem-gallery-stage {
+  position: relative;
   overflow: hidden;
-
   min-height: 500px;
-
   border: 1px solid var(--border);
   border-radius: 18px;
-
   background: var(--surface);
+}
+
+.gem-gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+}
+
+.gem-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gem-gallery-slide {
+  min-width: 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .gem-details-image {
@@ -53,6 +74,89 @@
   min-height: 500px;
 
   color: var(--text-muted);
+}
+
+.gem-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 50%;
+  background: rgba(2, 26, 26, 0.76);
+  color: white;
+  font-size: 19px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(10px);
+  transition: background-color 180ms ease, opacity 180ms ease;
+}
+
+.gem-gallery-arrow:hover:not(:disabled) {
+  background: rgba(2, 26, 26, 0.95);
+}
+
+.gem-gallery-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.gem-gallery-arrow--previous {
+  left: 18px;
+}
+
+.gem-gallery-arrow--next {
+  right: 18px;
+}
+
+.gem-gallery-count {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(2, 26, 26, 0.76);
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(10px);
+}
+
+.gem-gallery-thumbnails {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 1px 4px;
+  scrollbar-width: thin;
+}
+
+.gem-gallery-thumbnail {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid transparent;
+  background: var(--surface);
+  cursor: pointer;
+  opacity: 0.58;
+  transition: border-color 180ms ease, opacity 180ms ease;
+}
+
+.gem-gallery-thumbnail:hover,
+.gem-gallery-thumbnail.is-active {
+  border-color: var(--teal-light);
+  opacity: 1;
+}
+
+.gem-gallery-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .gem-details-info {
@@ -106,7 +210,7 @@
 
   color: var(--text-main);
 
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 36px;
 }
 
@@ -150,9 +254,15 @@
   }
 
   .gem-details-image,
-  .gem-details-image-container {
+  .gem-gallery-stage,
+  .gem-details-no-image {
     min-height: 360px;
     height: 420px;
+  }
+
+  .gem-gallery-arrow {
+    width: 40px;
+    height: 40px;
   }
 
   .gem-details-info h1 {

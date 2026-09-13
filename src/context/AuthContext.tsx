@@ -13,6 +13,7 @@ import { supabase } from '../lib/supabase'
 type AuthContextValue = {
   user: User | null
   loading: boolean
+  isAdmin: boolean
   signOut: () => Promise<void>
 }
 
@@ -27,7 +28,9 @@ export function AuthProvider({
   children,
 }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [sessionLoading, setSessionLoading] = useState(true)
+  const [adminLoading, setAdminLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -37,8 +40,14 @@ export function AuthProvider({
         await supabase.auth.getSession()
 
       if (active) {
-        setUser(data.session?.user ?? null)
-        setLoading(false)
+        const nextUser = data.session?.user ?? null
+
+        setUser(nextUser)
+        setSessionLoading(false)
+
+        if (!nextUser) {
+          setAdminLoading(false)
+        }
       }
     }
 
@@ -48,8 +57,17 @@ export function AuthProvider({
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setUser(session?.user ?? null)
-        setLoading(false)
+        const nextUser = session?.user ?? null
+
+        setUser(nextUser)
+        setSessionLoading(false)
+
+        if (nextUser) {
+          setAdminLoading(true)
+        } else {
+          setIsAdmin(false)
+          setAdminLoading(false)
+        }
       },
     )
 
@@ -58,6 +76,53 @@ export function AuthProvider({
       subscription.unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    let active = true
+
+    if (sessionLoading) {
+      return () => {
+        active = false
+      }
+    }
+
+    if (!user) {
+      setIsAdmin(false)
+      setAdminLoading(false)
+
+      return () => {
+        active = false
+      }
+    }
+
+    setAdminLoading(true)
+    const userId = user.id
+
+    async function checkAdminStatus() {
+      const { data, error } = await supabase
+        .from('admin_users')
+        .select('user_id')
+        .eq('user_id', userId)
+        .maybeSingle()
+
+      if (!active) return
+
+      if (error) {
+        console.error('Failed to check admin status:', error)
+        setIsAdmin(false)
+      } else {
+        setIsAdmin(Boolean(data))
+      }
+
+      setAdminLoading(false)
+    }
+
+    void checkAdminStatus()
+
+    return () => {
+      active = false
+    }
+  }, [sessionLoading, user])
 
   async function signOut() {
     const { error } = await supabase.auth.signOut({
@@ -69,9 +134,11 @@ export function AuthProvider({
     }
   }
 
+  const loading = sessionLoading || adminLoading
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, signOut }}
+      value={{ user, loading, isAdmin, signOut }}
     >
       {children}
     </AuthContext.Provider>

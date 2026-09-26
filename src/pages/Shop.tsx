@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import GemCard from '../components/GemCard'
+import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase.ts'
 import './Shop.css'
 
@@ -30,6 +32,7 @@ function getImageUrl(path: string) {
 
 
 function Shop() {
+  const { cartCount } = useCart()
   const [gems, setGems] = useState<GemRow[]>([])
   const [loading, setLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -101,7 +104,13 @@ function Shop() {
 
   return (
     <main className="shop-page">
-      <h1>Shop Gems</h1>
+      <header className="shop-heading">
+        <h1>Shop Gems</h1>
+
+        <Link className="shop-cart-link" to="/cart">
+          Trade Satchel <span>{cartCount}</span>
+        </Link>
+      </header>
 
       {loading && <p>Digging and cutting gems...</p>}
 

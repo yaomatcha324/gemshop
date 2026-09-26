@@ -7,6 +7,7 @@ import GemDetails from './pages/GemDetails'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import About from './pages/About'
+import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Mine from './pages/Mine'
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/gems/:id" element={<GemDetails />} />
         <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mine" element={<Mine />} />
         <Route

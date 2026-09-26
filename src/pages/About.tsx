@@ -21,7 +21,7 @@ function About() {
         <div className="about-content">
 
           <p className="about-label">
-            ABOUT YAO GEMS
+            MEET THE KEEPER
           </p>
 
           <h1>

@@ -58,10 +58,26 @@ function Home() {
 
   return (
     <main className="home-page">
+      <section className="home-hero" aria-labelledby="home-hero-title">
+        <div className="home-hero-content">
+          <h1 id="home-hero-title">
+            <span className="home-hero-welcome">Welcome to</span>
+            <span className="home-hero-name">Yao’s Gem Hoard</span>
+          </h1>
+
+          <p>
+            //the subtitle 
+            <span></span>
+          </p>
+        </div>
+      </section>
+
+
+
       <section className="home-section home-featured" aria-labelledby="featured-title">
         <div className="home-section-heading">
           <div>
-            <h1 id="featured-title" className="home-title">Featured Gems</h1>
+            <h2 id="featured-title" className="home-title">Treasures from the Hoard</h2>
           </div>
 
           <Link className="home-text-link" to="/shop">
@@ -120,7 +136,7 @@ function Home() {
 
       <section className="home-section home-about" aria-labelledby="about-title">
         <div className="about-copy">
-          <h2 id="about-title">About Yao Gems</h2>
+          <h2 id="about-title">About Yao's Hoard</h2>
           <p>
             Gemstones can be a lot more than a luxury symbol. 
           </p>

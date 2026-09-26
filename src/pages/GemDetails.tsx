@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase'
 import './GemDetails.css'
 
@@ -29,6 +30,14 @@ function getImageUrl(path: string) {
 
 function GemDetails() {
   const { id } = useParams<{ id: string }>()
+  const {
+    addToCart,
+    cartCount,
+    cartError,
+    cartLoading,
+    isGemUpdating,
+    isInCart,
+  } = useCart()
 
   const [gem, setGem] = useState<Gem | null>(null)
   const [loading, setLoading] = useState(true)
@@ -267,6 +276,35 @@ function GemDetails() {
           <p className="gem-details-price">
             NZ${gem.price.toLocaleString()}
           </p>
+
+          <div className="gem-details-cart-actions">
+            <button
+              type="button"
+              onClick={() => void addToCart(gem.id)}
+              disabled={cartLoading || isGemUpdating(gem.id) || isInCart(gem.id)}
+            >
+              {isGemUpdating(gem.id)
+                ? 'Adding to Satchel...'
+                : isInCart(gem.id)
+                  ? 'Already in Satchel'
+                  : 'Add to Trade Satchel'}
+            </button>
+
+            <Link to="/cart">
+              View Satchel{cartCount > 0 ? ` (${cartCount})` : ''}
+            </Link>
+          </div>
+
+          <p className="gem-details-cart-note">
+            Adding a gemstone to your satchel does not reserve it.
+          </p>
+
+          {cartError && (
+            <p className="gem-details-cart-error" role="alert">
+              {cartError}
+            </p>
+          )}
+
         {gem.description && (
         <section className="gem-description">
           <h2>Description</h2>

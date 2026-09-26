@@ -9,11 +9,13 @@ import {
 
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 import './Mine.css'
 
 function Mine() {
   const navigate = useNavigate()
   const { user, loading, isAdmin, signOut } = useAuth()
+  const { cartCount, cartError, cartLoading } = useCart()
 
   const [currentPassword, setCurrentPassword] =
     useState('')
@@ -123,10 +125,18 @@ function Mine() {
         </section>
 
         <section className="mine-card">
-          <h2>Shopping Cart</h2>
+          <h2>Trade Satchel</h2>
           <p>
-            Your shopping cart is currently empty.
+            {cartLoading
+              ? 'Syncing your trade satchel...'
+              : cartCount === 0
+              ? 'Your trade satchel is currently empty.'
+              : `You have ${cartCount} ${cartCount === 1 ? 'gemstone' : 'gemstones'} in your trade satchel.`}
           </p>
+          {cartError && <p className="mine-message" role="alert">{cartError}</p>}
+          <Link className="mine-primary-button" to="/cart">
+            View Satchel
+          </Link>
         </section>
 
         <section className="mine-card">
